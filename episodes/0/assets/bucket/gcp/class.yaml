@@ -1,0 +1,13 @@
+apiVersion: core.crossplane.io/v1alpha1
+kind: ResourceClass
+metadata:
+  name: gcsbucket
+  namespace: crossplane-system
+parameters:
+  location: US
+  storageClass: MULTI_REGIONAL
+provisioner: bucket.storage.gcp.crossplane.io/v1alpha1
+providerRef:
+  name: example
+  namespace: crossplane-system
+reclaimPolicy: Delete

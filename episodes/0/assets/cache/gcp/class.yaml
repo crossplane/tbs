@@ -1,0 +1,13 @@
+apiVersion: cache.gcp.crossplane.io/v1alpha1
+kind: CloudMemorystoreInstanceClass
+metadata:
+  name: standard-cldmem
+  namespace: crossplane-system
+specTemplate:
+  region: us-central1
+  tier: BASIC
+  memorySizeGb: 1
+  providerRef:
+    name: example
+    namespace: crossplane-system
+  reclaimPolicy: Delete

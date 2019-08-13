@@ -1,0 +1,10 @@
+apiVersion: cache.crossplane.io/v1alpha1
+kind: RedisClusterPolicy
+metadata:
+  name: redis-cluster-policy
+  namespace: crossplane-system
+defaultClassRef:
+  kind: CloudMemorystoreInstanceClass
+  apiVersion: cache.gcp.crossplane.io/v1alpha1
+  name: standard-cldmem
+  namespace: crossplane-system

@@ -1,0 +1,12 @@
+apiVersion: cache.crossplane.io/v1alpha1
+kind: RedisCluster
+metadata:
+  name: redis-claim
+  namespace: crossplane-system
+spec:
+  classRef:
+    kind: CloudMemorystoreInstanceClass
+    apiVersion: cache.gcp.crossplane.io/v1alpha1
+    name: standard-cldmem
+    namespace: crossplane-system
+  engineVersion: "3.2"
