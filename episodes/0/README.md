@@ -18,7 +18,7 @@ Full Show: https://youtu.be/Uuc5BNaUOiw
 * [00:47:49](https://youtu.be/Uuc5BNaUOiw?t=2869) - Provisioning GCP Cloud Memorystore using defaulting policy
 * [00:53:51](https://youtu.be/Uuc5BNaUOiw?t=3231) - The way forward is Stacks
 * [00:57:14](https://youtu.be/Uuc5BNaUOiw?t=3434) - A look at the Crossplane roadmap
-* [1:00:08](https://youtu.be/Uuc5BNaUOiw?t=3608) - Wrap up
+* [01:00:08](https://youtu.be/Uuc5BNaUOiw?t=3608) - Wrap up
 
 ## References
 
