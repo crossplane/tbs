@@ -6,7 +6,7 @@ You can find all episodes on the [official YouTube channel](https://www.youtube.
 
 ## Logistics
 
-The Binding Status airs live every other Tuesday at 9:00 AM PT (Pacific Time). It alternates weeks with the Crossplane [community meeting](https://github.com/crossplaneio/crossplane#community-meeting).
+The Binding Status airs live every other Thursday at 9:00 AM PT (Pacific Time). It alternates weeks with the Crossplane [community meeting](https://github.com/crossplaneio/crossplane#community-meeting).
 
 Episodes generally follow a similar format:
 * Host introduction
