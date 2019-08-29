@@ -1,0 +1,7 @@
+apiVersion: slack.crossplane.io/v1
+kind: Message
+metadata:
+  name: message-sample
+spec:
+  # Add fields here
+  foo: bar

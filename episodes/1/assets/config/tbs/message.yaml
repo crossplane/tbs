@@ -1,0 +1,10 @@
+apiVersion: slack.crossplane.io/v1
+kind: Message
+metadata:
+  name: message-sample
+spec:
+  text: "Hello from TBS Live!"
+  channel: DLHKY7WA3 # Channel ID
+  providerRef:
+    name: example
+    namespace: default

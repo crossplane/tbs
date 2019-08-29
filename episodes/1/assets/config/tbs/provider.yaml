@@ -1,0 +1,21 @@
+---
+# Slack token secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-provider-slack
+  namespace: default
+type: Opaque
+data:
+  token: BASE64ENCODED_TOKEN
+---
+# Slack Provider
+apiVersion: slack.crossplane.io/v1
+kind: Provider
+metadata:
+  name: example
+  namespace: default
+spec:
+  credentialsSecretRef:
+    name: example-provider-slack
+    key: token

@@ -1,0 +1,10 @@
+version: "2"
+domain: crossplane.io
+repo: github.com/crossplaneio/tbs/episodes/1/assets
+resources:
+- group: slack
+  version: v1
+  kind: Message
+- group: slack
+  version: v1
+  kind: Provider
