@@ -1,0 +1,20 @@
+title: ""
+readme: ""
+overview: ""
+overviewShort: ""
+version: 0.0.1
+maintainers:
+- name: ""
+  email: ""
+owners:
+- name: ""
+  email: ""
+company: ""
+category: ""
+keywords:
+ - "crossplane-cli"
+website: ""
+source: ""
+permissionScope: Cluster
+# License SPDX name: https://spdx.org/licenses/
+license: Apache-2.0

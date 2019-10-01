@@ -1,0 +1,12 @@
+id: instance
+title: Linode Instance
+titlePlural: Linode Instance
+category: Compute
+overviewShort: Linode Instance VM
+overview: |
+ Linode Instances are VMs of different shapes and sizes.
+readme: |
+ ## Linode Instance
+ ### Usage
+ You'll want to specify `region`, `type`, `image`, and `authorizedUsers`
+

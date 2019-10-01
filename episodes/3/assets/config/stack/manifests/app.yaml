@@ -1,0 +1,33 @@
+title: "Linode Stack (demo)"
+readme: |-
+  ## Linode Stack
+  ### Demo
+  This is **only** a demo.
+overview: |-
+  Linode Stack for demonstration purposes.
+overviewShort: "Linode Stack for demonstration purposes"
+version: 0.0.1
+maintainers:
+- name: "Marques Johansson"
+  email: "marques@upbound.io"
+owners:
+- name: "Marques Johansson"
+  email: "marques@upbound.io"
+company: "Crossplane"
+category: ""
+keywords:
+ - "linode"
+website: "https://github.com/crossplane/tbs"
+source: "https://github.com/displague/stack-linode-demo"
+# RBAC ClusterRoles will be generated permitting this stack to use all verbs on all
+# resources in the groups listed below.
+permissionScope: Cluster
+dependsOn:
+- crd: '*.cache.crossplane.io/v1alpha1'
+- crd: '*.compute.crossplane.io/v1alpha1'
+- crd: '*.database.crossplane.io/v1alpha1'
+- crd: '*.core.crossplane.io/v1alpha1'
+- crd: '*.storage.crossplane.io/v1alpha1'
+- crd: '*.workload.crossplane.io/v1alpha1'
+# License SPDX name: https://spdx.org/licenses/
+license: Apache-2.0
