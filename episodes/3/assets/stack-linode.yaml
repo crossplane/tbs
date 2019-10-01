@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linode-infra-dev
+---
+apiVersion: stacks.crossplane.io/v1alpha1
+kind: ClusterStackInstall
+metadata:
+  name: stack-linode-infra-dev
+  namespace: linode-infra-dev
+spec:
+  package: "linode:foo"

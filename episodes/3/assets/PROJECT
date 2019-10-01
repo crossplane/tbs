@@ -1,0 +1,3 @@
+version: "2"
+domain: stack.crossplane.io
+repo: github.com/displague/stack-linode

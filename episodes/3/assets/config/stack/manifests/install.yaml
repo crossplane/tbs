@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "stack-linode-demo"
+  labels:
+    core.crossplane.io/name: "stack-linode-demo"
+spec:
+  selector:
+    matchLabels:
+      core.crossplane.io/name: "stack-linode-demo"
+  replicas: 1
+  template:
+    metadata:
+      name: "stack-linode-demo-controller"
+      labels:
+        core.crossplane.io/name: "stack-linode-demo"
+    spec:
+      containers:
+      - name: "stack-linode-demo-controller"
+        image: "stack-linode-demo"
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace

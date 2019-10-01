@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ""
+  labels:
+    core.crossplane.io/name: ""
+spec:
+  selector:
+    matchLabels:
+      core.crossplane.io/name: ""
+  replicas: 1
+  template:
+    metadata:
+      name: "-controller"
+      labels:
+        core.crossplane.io/name: ""
+    spec:
+      containers:
+      - name: "-controller"
+        image: ""
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
