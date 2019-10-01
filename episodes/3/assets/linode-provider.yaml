@@ -1,0 +1,9 @@
+apiVersion: linode.stack.crossplane.io/v1alpha1
+kind: Provider
+metadata:
+  name: linode-provider
+  namespace: linode-infra-dev
+spec:
+  credentialsSecretRef:
+    key: token
+    name: linode-provider-creds

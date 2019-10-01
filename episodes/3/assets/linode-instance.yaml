@@ -1,0 +1,28 @@
+---
+apiVersion: linode.stack.crossplane.io/v1alpha1
+kind: Instance
+metadata:
+  name: test-instance
+  namespace: linode-infra-dev
+spec:
+  region: us-east
+  type: g6-nanode-1
+  authorizedUsers:
+  - crossplane_stack
+  image: linode/alpine3.10
+  status: asdaadad
+
+  # reclaimPolicy defines what behavior crossplane should take on external resources
+  # when managed resources are removed
+  reclaimPolicy: Delete
+
+  # this is the Provider object that refers to
+  # our api token secret
+  providerRef:
+    name: linode-provider
+    namespace: linode-infra-dev
+
+  # we're not using this in the demo, but this could be
+  # a generated ssh key or root password
+  writeConnectionSecretToRef:
+    name: test-instance-secrets
