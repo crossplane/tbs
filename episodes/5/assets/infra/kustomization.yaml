@@ -1,0 +1,7 @@
+resources:
+- cloudsql-class.yaml
+- gke-class.yaml
+- connection.yaml
+- global-address.yaml
+- network.yaml
+- subnetwork.yaml

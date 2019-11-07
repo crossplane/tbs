@@ -1,0 +1,13 @@
+apiVersion: servicenetworking.gcp.crossplane.io/v1alpha3
+kind: Connection
+metadata:
+  name: tbs-connection
+spec:
+  parent: services/servicenetworking.googleapis.com
+  networkRef:
+    name: tbs-network
+  reservedPeeringRangeRefs:
+    - name: tbs-globaladdress
+  reclaimPolicy: Delete
+  providerRef:
+    name: gcp-provider

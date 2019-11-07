@@ -1,0 +1,14 @@
+apiVersion: compute.gcp.crossplane.io/v1alpha3
+kind: GlobalAddress
+metadata:
+  name: tbs-globaladdress
+spec:
+  name: my-tbs-globaladdress
+  purpose: VPC_PEERING
+  addressType: INTERNAL
+  prefixLength: 16
+  networkRef:
+    name: tbs-network
+  reclaimPolicy: Delete
+  providerRef:
+    name: gcp-provider
