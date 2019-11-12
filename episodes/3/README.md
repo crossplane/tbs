@@ -27,3 +27,4 @@ Live Stream: <https://youtu.be/Bi85jSupt64>
 * stack-packet-demo repo: <https://github.com/hasheddan/stack-packet-demo>
 * Crossplane Youtube Channel: <https://www.youtube.com/channel/UC19FgzMBMqBro361HbE46Fw>
 * TBS repo: <https://github.com/crossplaneio/tbs>
+* Opening and closing theme by [Daniel Suskin](https://soundcloud.com/suskin)

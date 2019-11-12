@@ -9,6 +9,7 @@ You can find all episodes on the [official YouTube channel](https://www.youtube.
 The Binding Status airs live every other Thursday at 9:00 AM PT (Pacific Time). It alternates weeks with the Crossplane [community meeting](https://github.com/crossplaneio/crossplane#community-meeting).
 
 Episodes generally follow a similar format:
+
 * Host introduction
 * What is happening in the Crossplane community?
 * Relevant Kubernetes news
@@ -20,6 +21,8 @@ Episodes generally follow a similar format:
 * [TBS(1): Crossplane-Runtime](episodes/1)
 * [TBS(2): Stack-GCP](episodes/2)
 * [TBS(3): Yet Another Live Stack](episodes/3)
+* [TBS(4): BYO Cluster](episodes/4)
+* [TBS(5): Crossplane v0.4.0](episodes/5)
 
 ## Requesting a Topic
 
