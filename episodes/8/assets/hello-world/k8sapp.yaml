@@ -1,0 +1,74 @@
+apiVersion: workload.crossplane.io/v1alpha1
+kind: KubernetesApplication
+metadata:
+  name: testapp
+  labels:
+    app: testapp
+spec:
+  resourceSelector:
+    matchLabels:
+      app: testapp
+  targetSelector:
+    matchLabels:
+      tbs: demo
+  resourceTemplates:
+    - metadata:
+        name: testapp-namespace
+        labels:
+          app: testapp
+      spec:
+        template:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: testapp
+            labels:
+              app: testapp
+    - metadata:
+        name: testapp-deployment
+        labels:
+          app: testapp
+      spec:
+        template:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: hello-world
+            namespace: testapp
+          spec:
+            selector:
+              matchLabels:
+                app: testapp
+            replicas: 2
+            template:
+              metadata:
+                labels:
+                  app: testapp
+              spec:
+                containers:
+                  - name: hello-world
+                    image: gcr.io/google-samples/node-hello:1.0
+                    ports:
+                      - containerPort: 8080
+                        protocol: TCP
+    - metadata:
+        name: testapp-service
+        labels:
+          app: testapp
+      spec:
+        template:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            namespace: testapp
+            name: testapp
+            labels:
+              app: testapp
+          spec:
+            ports:
+              - port: 8080
+                protocol: TCP
+                targetPort: 8080
+            selector:
+              app: testapp
+            type: LoadBalancer

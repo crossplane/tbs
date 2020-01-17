@@ -1,0 +1,16 @@
+apiVersion: container.gcp.crossplane.io/v1alpha1
+kind: NodePool
+metadata:
+  name: tbs-demo-nodepool2
+spec:
+  forProvider:
+    initialNodeCount: 2
+    autoscaling:
+      enabled: true
+      maxNodeCount: 3
+      minNodeCount: 1
+    clusterRef:
+      name: tbs-demo-cluster
+  providerRef:
+    name: tbs-gcp
+  reclaimPolicy: Delete

@@ -1,0 +1,14 @@
+apiVersion: workload.crossplane.io/v1alpha1
+kind: KubernetesTarget
+metadata:
+  name: k8starget
+  namespace: target-demo
+  labels:
+    tbs: demo 
+spec:
+  clusterRef:
+    apiVersion: container.gcp.crossplane.io/v1beta1
+    kind: GKECluster
+    name: tbs-demo-cluster
+  connectionSecretRef:
+    name: propagate-me
