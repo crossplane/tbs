@@ -1,0 +1,15 @@
+apiVersion: container.gcp.crossplane.io/v1beta1
+kind: GKECluster
+metadata:
+  name: tbs-demo-cluster
+spec:
+  forProvider:
+    location: us-central1-a
+    masterAuth:
+      username: admin
+  writeConnectionSecretToRef:
+    name: tbs-demo
+    namespace: crossplane-system
+  providerRef:
+    name: tbs-gcp
+  reclaimPolicy: Delete

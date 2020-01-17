@@ -1,0 +1,14 @@
+apiVersion: compute.crossplane.io/v1alpha1
+kind: KubernetesCluster
+metadata:
+  name: app-kubernetes
+  namespace: default
+  labels:
+    tbs: demo 
+spec:
+  resourceRef:
+    apiVersion: container.gcp.crossplane.io/v1beta1
+    kind: GKECluster
+    name: tbs-demo-cluster
+  writeConnectionSecretToRef:
+    name: k8scluster

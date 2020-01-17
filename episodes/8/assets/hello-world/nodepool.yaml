@@ -1,0 +1,13 @@
+apiVersion: container.gcp.crossplane.io/v1alpha1
+kind: NodePool
+metadata:
+  name: tbs-demo-nodepool
+spec:
+  forProvider:
+    initialNodeCount: 1
+    clusterRef:
+      name: tbs-demo-cluster
+  writeConnectionSecretsToNamespace: crossplane-system
+  providerRef:
+    name: tbs-gcp
+  reclaimPolicy: Delete
