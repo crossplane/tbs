@@ -1,5 +1,7 @@
 # Guide
 
+This guide goes through setting up two different Kubernetes local development environments using Crossplane and Okteto!
+
 ## Steps
 
 ### 1. Install Okteto CLI

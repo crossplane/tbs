@@ -1,4 +1,4 @@
-# TBS[10]: Would you like some k3sup on that?
+# TBS[10]: Local K8s Development with Crossplane + Okteto
 
 In this episode we are going to take a look at doing local development on
 Kubernetes using [Okteto](https://github.com/okteto/okteto) and
