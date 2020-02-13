@@ -1,0 +1,17 @@
+name: hello-world
+image: okteto/golang:1
+command:
+- bash
+workdir: /okteto
+volumes:
+- /go/pkg/
+- /root/.cache/go-build/
+environment:
+- TBS_MESSAGE=we replaced the message
+securityContext:
+  capabilities:
+    add:
+    - SYS_PTRACE
+forward:
+- 8080:8080
+- 2345:2345

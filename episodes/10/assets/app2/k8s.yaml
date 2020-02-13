@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-2
+  namespace: okteto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-2
+  template:
+    metadata:
+      labels:
+        app: hello-world-2
+    spec:
+      containers:
+      - image: okteto/hello-world:golang
+        name: hello-world-2
+        env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: mysqlconn
+                key: endpoint
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysqlconn
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysqlconn
+                key: password
+      initContainers:
+      - name: init-mysql
+        image: ubuntu:latest
+        command: ['/bin/bash', '-c', 'apt-get update && apt-get install -y mysql-client && mysql -u $DB_USER -p$DB_PASSWORD -h $DB_HOST -e "CREATE DATABASE IF NOT EXISTS okteto;"']
+        env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: mysqlconn
+                key: endpoint
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysqlconn
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysqlconn
+                key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-2
+  namespace: okteto
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP  
+  ports:
+  - name: "hello-world-2"
+    port: 8080
+  selector:
+    app: hello-world-2
