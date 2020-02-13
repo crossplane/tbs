@@ -1,4 +1,4 @@
-# TBS[8]: Would you like some k3sup on that?
+# TBS[9]: Would you like some k3sup on that?
 
 In this episode we are going to have some fun with the new Crossplane
 [k3sup](https://github.com/alexellis/k3sup) integration! We will:
