@@ -1,0 +1,9 @@
+apiVersion: workload.crossplane.io/v1alpha1
+kind: KubernetesTarget
+metadata:
+  name: capi-crossplane
+  labels:
+    tbs: eleven
+spec:
+  connectionSecretRef:
+    name: capi-crossplane

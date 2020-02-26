@@ -1,0 +1,7 @@
+apiVersion: stacks.crossplane.io/v1alpha1
+kind: ClusterStackInstall
+metadata:
+  name: stack-aws
+  namespace: crossplane-system
+spec:
+  package: "crossplane/stack-aws:v0.6.0"
