@@ -1,0 +1,14 @@
+apiVersion: database.crossplane.io/v1alpha1
+kind: MySQLInstance
+metadata:
+  name: capi-app-mysql
+spec:
+  classSelector:
+    matchLabels:
+      tbs: eleven
+  # resourceRef:
+  #   apiVersion: database.aws.crossplane.io/v1beta1
+  #   kind: RDSInstance
+  #   name: rdsmysql-2
+  writeConnectionSecretToRef:
+    name: mysqlconn

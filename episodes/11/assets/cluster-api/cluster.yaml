@@ -1,0 +1,22 @@
+apiVersion: cluster.x-k8s.io/v1alpha3
+kind: Cluster
+metadata:
+  name: capi-quickstart
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks: ["192.168.0.0/16"]
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+    kind: AWSCluster
+    name: capi-quickstart
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
+kind: AWSCluster
+metadata:
+  name: capi-quickstart
+spec:
+  # Change this value to the region you want to deploy the cluster in.
+  region: us-west-2
+  # Change this value to a valid SSH Key Pair present in your AWS Account.
+  sshKeyName: tbs
