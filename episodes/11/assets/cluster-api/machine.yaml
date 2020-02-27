@@ -22,7 +22,7 @@ spec:
         nodepool: nodepool-0
     spec:
       clusterName: capi-quickstart
-      version: v1.15.3
+      version: v1.16.6
       bootstrap:
         configRef:
           name: capi-quickstart-worker
