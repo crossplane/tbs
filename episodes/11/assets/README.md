@@ -16,7 +16,7 @@ kubectl apply -f network/ -R
 ```
 4. Create Crossplane infrastructure classes
 ```
-kubectl apply -f infra/ -R
+kubectl apply -f infra/rdsclass.yaml
 ```
 5. Install Cert Manager
 ```
@@ -96,7 +96,7 @@ kubectl apply -f app/mysql.yaml
 ```
 17. Create App
 ```
-kubectl apply -f app/mysql.yaml
+kubectl apply -f app/app.yaml
 ```
 18. Interact with App
 ```bash
