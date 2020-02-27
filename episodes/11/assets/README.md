@@ -24,23 +24,23 @@ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.1
 ```
 6. Install Cluster API
 ```
-kustomize build github.com/kubernetes-sigs/cluster-api//config?ref=master | kubectl apply -f -
+kustomize build github.com/kubernetes-sigs/cluster-api//config?ref=v0.3.0-rc.2 | kubectl apply -f -
 ```
 7. Install Kubeadm Bootstrap Provider
 ```
-kustomize build github.com/kubernetes-sigs/cluster-api//bootstrap/kubeadm/config?ref=master | kubectl apply -f -
+kustomize build github.com/kubernetes-sigs/cluster-api//bootstrap/kubeadm/config?ref=v0.3.0-rc.2 | kubectl apply -f -
 ```
-8. Install AWS Provider
+8. Install Kubeadm Control Plane Provider
+```
+kustomize build github.com/kubernetes-sigs/cluster-api//controlplane/kubeadm/config?ref=v0.3.0-rc.2 | kubectl apply -f -
+```
+9. Install AWS Provider
 ```
 ./cluster-api/aws.sh
 ```
-9. Create cluster
+10. Create cluster and control plane
 ```
 kubectl apply -f cluster-api/cluster.yaml
-```
-10. Create control plane
-```
-kubectl apply -f cluster-api/controlplane.yaml
 ```
 11. Connect to control plane
 ```
@@ -52,7 +52,7 @@ kubectl --namespace=default get secret/capi-quickstart-kubeconfig -o json \
 12. Deploy Calico
 ```
 kubectl --kubeconfig=./capi-quickstart.kubeconfig \
-  apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+  apply -f https://docs.projectcalico.org/v3.12/manifests/calico.yaml
 ```
 13. Create machine node
 ```
