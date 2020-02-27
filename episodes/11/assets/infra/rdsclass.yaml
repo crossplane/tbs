@@ -1,5 +1,5 @@
 apiVersion: database.aws.crossplane.io/v1beta1
-kind: RDSInstance
+kind: RDSInstanceClass
 metadata:
   name: rdsmysqlclass
   labels:
@@ -17,7 +17,7 @@ specTemplate:
     publiclyAccessible: true
     applyModificationsImmediately: true
     skipFinalSnapshotBeforeDeletion: true
-  writeConnectionSecretToNamespace: crossplane-system
+  writeConnectionSecretsToNamespace: crossplane-system
   providerRef:
     name: aws-provider
   reclaimPolicy: Delete
