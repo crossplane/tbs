@@ -5,7 +5,7 @@
 ```
 kubectl create namespace crossplane-system
 helm repo add crossplane-master https://charts.crossplane.io/master/
-helm search repo crossplane --devel
+version=$(helm search repo crossplane --devel | awk '$1 == "crossplane-master/crossplane" {print $2}')
 helm install crossplane --namespace crossplane-system crossplane-master/crossplane --version $version --set clusterStacks.gcp.deploy=true --set clusterStacks.gcp.version=master --devel
 ```
 
