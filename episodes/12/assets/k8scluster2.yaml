@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linkerd2
+---
+apiVersion: compute.crossplane.io/v1alpha1
+kind: KubernetesCluster
+metadata:
+  name: k8s-linkerd2
+  namespace: linkerd2
+spec:
+  classSelector:
+    matchLabels:
+      tbs: "ep13"
+  writeConnectionSecretToRef:
+    name: k8scluster
