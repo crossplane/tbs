@@ -1,0 +1,12 @@
+apiVersion: storage.crossplane.io/v1alpha1
+kind: Bucket
+metadata:
+  name: app-bucket
+  namespace: openfaas-fn
+spec:
+  classSelector:
+    matchLabels:
+      tbs: episode14
+  name: crossplane-tbs-14
+  writeConnectionSecretToRef:
+    name: bucket
