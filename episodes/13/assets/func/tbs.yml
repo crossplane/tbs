@@ -8,6 +8,17 @@ functions:
     lang: golang-middleware
     handler: ./upload
     image: hasheddan/uploadtbs13:latest
+    environment:
+      bucket_name: crossplane-tbs-14
+    secrets:
+    - bucket
+  
+  ui:
+    lang: golang-middleware
+    handler: ./ui
+    image: hasheddan/uitbs13:latest
+    environment:
+      bucket_name: crossplane-tbs-14
     secrets:
     - bucket
 
