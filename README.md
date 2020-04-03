@@ -23,6 +23,14 @@ Episodes generally follow a similar format:
 * [TBS(3): Yet Another Live Stack](episodes/3)
 * [TBS(4): BYO Cluster](episodes/4)
 * [TBS(5): Crossplane v0.4.0](episodes/5)
+* [TBS(6): Crossplane Turns One](episodes/6)
+* [TBS(7): Lost in Translation](episodes/7)
+* [TBS(8): All Things GKE](episodes/8)
+* [TBS(9): Would you like some k3sup on that?](episodes/9)
+* [TBS(10): Local K8s Development with Crossplane + Okteto](episodes/10)
+* [TBS(11): Cluster API](episodes/11)
+* [TBS(12): Linkerd](episodes/12)
+* [TBS(13): OpenFaaS](episodes/13)
 
 ## Requesting a Topic
 
