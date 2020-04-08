@@ -1,0 +1,6 @@
+*.crt
+*.key
+*.srl
+*.conf
+*.csr
+webhook-configuration.yaml

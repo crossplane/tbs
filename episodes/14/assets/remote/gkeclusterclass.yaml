@@ -1,0 +1,14 @@
+apiVersion: compute.gcp.crossplane.io/v1alpha3
+kind: GKEClusterClass
+metadata:
+  name: gkecluster-standard
+  labels:
+    tbs: "ep14"
+specTemplate:
+  writeConnectionSecretsToNamespace: crossplane-system
+  machineType: n1-standard-1
+  numNodes: 3
+  zone: us-central1-b
+  providerRef:
+    name: gcp-provider
+  reclaimPolicy: Delete

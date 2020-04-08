@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: CloudSQLSize
+metadata:
+  name: cloud-sql-size-20
+spec:
+  match:
+    kinds:
+      - apiGroups: ["database.gcp.crossplane.io"]
+        kinds: ["CloudSQLInstance"]
+  parameters:
+    size: 20
