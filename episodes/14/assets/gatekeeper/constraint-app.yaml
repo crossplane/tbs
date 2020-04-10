@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: ClaimSchedule
+metadata:
+  name: db-no-large
+spec:
+  match:
+    kinds:
+      - apiGroups: ["database.crossplane.io"]
+        kinds: ["MySQLInstance"]
+    namespaces:
+      - default
+  parameters:
+    labels:
+      db: large

@@ -1,0 +1,22 @@
+apiVersion: database.gcp.crossplane.io/v1beta1
+kind: CloudSQLInstanceClass
+metadata:
+  name: big-db-class
+  labels:
+    tbs: "ep14"
+specTemplate:
+  forProvider:
+    databaseVersion: POSTGRES_9_6
+    region: us-west2
+    settings:
+      tier: db-custom-1-3840
+      dataDiskType: PD_SSD
+      dataDiskSizeGb: 30
+      ipConfiguration:
+        ipv4Enabled: true
+        authorizedNetworks:
+          - value: "0.0.0.0/0"
+  writeConnectionSecretsToNamespace: crossplane-system
+  providerRef:
+    name: gcp-provider
+  reclaimPolicy: Delete

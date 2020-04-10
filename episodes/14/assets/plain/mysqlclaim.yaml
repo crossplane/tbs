@@ -1,0 +1,11 @@
+apiVersion: database.crossplane.io/v1alpha1
+kind: MySQLInstance
+metadata:
+  name: app-mysql
+spec:
+  classSelector:
+    matchLabels:
+      tbs: "ep14"
+  writeConnectionSecretToRef:
+    name: mysqlconn
+  engineVersion: "5.6"
