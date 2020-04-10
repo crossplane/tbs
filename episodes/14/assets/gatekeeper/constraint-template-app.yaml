@@ -1,0 +1,38 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: claimschedule
+spec:
+  crd:
+    spec:
+      names:
+        kind: ClaimSchedule
+        listKind: ClaimScheduleList
+        plural: claimschedules
+        singular: claimschedule
+      validation:
+        openAPIV3Schema:
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package claimschedule
+
+        violation[{"msg": msg,  "details": {}}] {
+          input.review.operation = "CREATE"
+          count(input.review.object.spec.classSelector.matchLabels) < 1
+          msg := "All claims must provide a non-empty Class Selector"
+        }
+
+        violation[{"msg": msg,  "details": {}}] {
+          input.review.operation = "CREATE"
+          provided := {[label, value] | value := input.review.object.spec.classSelector.matchLabels[label]}
+          available := {[label, value] | value := input.parameters.labels[label]}
+          diff := provided - available
+          count(diff) > 0
+          msg = sprintf("you used a Class Selector label (%v) that is not permitted. These labels are permitted in your namespace: %v", [diff, input.parameters.labels])
+        }

@@ -139,18 +139,33 @@ kubectl -n opa delete configmap db-size
 ## Gatekeeper
 
 1. Deploy Gatekeeper
+
 ```
 kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml
 ```
 
-2. Create `ConstraintTemplate`
+2. Create `ConstraintTemplate` for global CloudSQL policy
+
 ```
 kubectl apply -f gatekeeper/constraint-template.yaml
 ```
 
-3. Create Constraint
+3. Create `Constraint` for global CloudSQL policy
+
 ```
-kubectl apply -f gatekeeper.constraint.yaml
+kubectl apply -f gatekeeper/constraint.yaml
+```
+
+4. Create `ConstraintTemplate` for namespace-level policy
+
+```
+kubectl apply -f gatekeeper/constraint-template-app.yaml
+```
+
+4. Create `Constraints` for namespace-level policy
+
+```
+kubectl apply -f gatekeeper/constraint-app.yaml
 ```
 
 ### Static Provisioning
@@ -185,7 +200,15 @@ kubectl apply -f plain/mysqlclaim.yaml
 
 1. Create `GKEClusterClass`
 
+```
+kubectl apply -f remote/gkeclusterclass.yaml
+```
+
 2. Create `KubernetesCluster` claim
+
+```
+kubectl apply -f remote/k8scluster.yaml
+```
 
 3. Deploy Gatekeeper into remote cluster
 
