@@ -1,0 +1,26 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: tbs-live
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: hasheddan/tbs15service:latest
+          env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: conn
+                key: endpoint
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: conn
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: conn
+                key: password

@@ -1,0 +1,13 @@
+apiVersion: bindings.mattmoor.dev/v1alpha1
+kind: SQLBinding
+metadata:
+  name: foo-binding
+spec:
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    selector:
+      matchLabels:
+        bind: sql
+  secret:
+    name: conn-bind
