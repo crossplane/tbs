@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: tbs-live-bind
+  namespace: default
+  labels:
+    bind: sql
+spec:
+  template:
+    spec:
+      containers:
+        - image: hasheddan/tbs15service:latest
