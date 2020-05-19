@@ -13,7 +13,7 @@ integration.
 Hosts: [@hasheddan](https://twitter.com/hasheddan) and [Torin
 Sandall](https://twitter.com/sometorin)
 
-Live Stream: https://youtu.be/o0-xkk6pCGM
+Live Stream: https://youtu.be/TaF0_syejXc
 
 ## Time References
 
