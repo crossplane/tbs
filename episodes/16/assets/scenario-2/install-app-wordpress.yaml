@@ -1,0 +1,6 @@
+apiVersion: stacks.crossplane.io/v1alpha1
+kind: StackInstall
+metadata:
+  name: app-wordpress
+spec:
+  package: "crossplane/app-wordpress:v0.4.0"
