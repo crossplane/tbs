@@ -1,0 +1,6 @@
+apiVersion: wordpress.apps.crossplane.io/v1alpha1
+kind: WordpressInstance
+metadata:
+  name: my-wp
+spec:
+  provisionPolicy: ProvisionNewCluster

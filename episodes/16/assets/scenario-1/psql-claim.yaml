@@ -1,0 +1,10 @@
+apiVersion: database.crossplane.io/v1alpha1
+kind: PostgreSQLInstance
+metadata:
+  name: app-postgresql
+spec:
+  classSelector:
+    matchLabels:
+      app: tbs
+  writeConnectionSecretToRef:
+    name: conn
