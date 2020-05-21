@@ -1,0 +1,37 @@
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: Composition
+metadata:
+  name: gke.gcp.compute.example.org
+  labels:
+    provider: gcp
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  reclaimPolicy: Delete
+  from:
+    apiVersion: compute.example.org/v1alpha1
+    kind: K8sCluster
+  to:
+    - base:
+        apiVersion: compute.gcp.crossplane.io/v1alpha3
+        kind: GKECluster
+        spec:
+          writeConnectionSecretToRef:
+            namespace: crossplane-system
+          machineType: n1-standard-1
+          zone: us-central1-b
+          providerRef:
+            name: gcp-provider
+          reclaimPolicy: Delete
+      patches:
+        - fromFieldPath: "metadata.uid"
+          toFieldPath: "spec.writeConnectionSecretToRef.name"
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-k8scluster"
+        - fromFieldPath: "spec.parameters.nodes"
+          toFieldPath: "spec.numNodes"
+        - fromFieldPath: "spec.parameters.location"
+          toFieldPath: "spec.zone"
+      connectionDetails:
+        - fromConnectionSecretKey: kubeconfig
