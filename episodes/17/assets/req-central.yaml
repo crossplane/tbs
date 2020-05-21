@@ -1,0 +1,14 @@
+apiVersion: compute.example.org/v1alpha1
+kind: K8sClusterRequirement
+metadata:
+  name: cluster-central
+  namespace: default
+spec:
+  parameters:
+    nodes: 3
+    location: us-central1-c
+  compositionSelector:
+    matchLabels:
+      provider: gcp
+  writeConnectionSecretToRef:
+    name: k8s-conn-central

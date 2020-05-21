@@ -1,0 +1,14 @@
+apiVersion: compute.example.org/v1alpha1
+kind: K8sClusterRequirement
+metadata:
+  name: cluster-west
+  namespace: default
+spec:
+  parameters:
+    nodes: 4
+    location: us-west1-a
+  compositionSelector:
+    matchLabels:
+      provider: gcp
+  writeConnectionSecretToRef:
+    name: k8s-conn-west

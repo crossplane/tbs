@@ -1,0 +1,42 @@
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: InfrastructureDefinition
+metadata:
+  name: k8sclusters.compute.example.org
+spec:
+  connectionSecretKeys:
+    - kubeconfig
+  crdSpecTemplate:
+    group: compute.example.org
+    version: v1alpha1
+    names:
+      kind: K8sCluster
+      listKind: K8sClusterList
+      plural: k8sclusters
+      singular: k8scluster
+    validation:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  nodes:
+                    type: integer
+                  location:
+                    type: string
+                required:
+                  - nodes
+                  - location
+            required:
+              - parameters
+---
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: InfrastructurePublication
+metadata:
+  name: k8sclusters.compute.example.org
+spec:
+  infrastructureDefinitionRef:
+    name: k8sclusters.compute.example.org

@@ -1,0 +1,10 @@
+leafnodes:
+  enabled: true
+  remotes:
+    - url: tls://connect.ngs.global:7422
+      credentials:
+        secret:
+          name: ngs-creds
+          key: TBS.creds
+natsbox:
+  enabled: true

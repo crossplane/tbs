@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k8sclusters.compute.example.org
+  labels:
+    rbac.crossplane.io/aggregate-to-crossplane: "true"
+rules:
+- apiGroups:
+  - compute.example.org
+  resources:
+  - k8sclusters
+  - k8sclusters/status
+  - k8sclusterrequirements
+  - k8sclusterrequirements/status
+  verbs:
+  - "*"
