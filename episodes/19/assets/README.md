@@ -49,10 +49,14 @@ kubectl apply -f cluster-2.yaml
 
 7. Get `kubeconfig`
 
+```
 kubectl get secret gke-conn -o=jsonpath={.data.kubeconfig} | base64 --decode > gke.kube
 kubectl get secret eks-conn -o=jsonpath={.data.kubeconfig} | base64 --decode > eks.kube
+```
 
 8. Use `kubeconfig`
 
+```
 kubectl get nodes --kubeconfig=gke.kube
 kubectl get nodes --kubeconfig=eks.kube
+```
