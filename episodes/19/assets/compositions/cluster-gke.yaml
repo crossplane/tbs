@@ -1,0 +1,57 @@
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: Composition
+metadata:
+  name: clusters.kubernetes.gke.hasheddan.org
+  labels:
+    provider: gcp
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  reclaimPolicy: Delete
+  from:
+    apiVersion: kubernetes.hasheddan.org/v1alpha1
+    kind: Cluster
+  to:
+  - base:
+      apiVersion: container.gcp.crossplane.io/v1beta1
+      kind: GKECluster
+      spec:
+        forProvider:
+          masterAuth:
+            username: admin
+          location: us-central1-a
+        writeConnectionSecretToRef:
+          namespace: crossplane-system
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+    - fromFieldPath: "metadata.uid"
+      toFieldPath: "spec.writeConnectionSecretToRef.name"
+      transforms:
+      - type: string
+        string:
+          fmt: "%s-controlplane"
+    connectionDetails:
+    - fromConnectionSecretKey: kubeconfig
+  - base:
+      apiVersion: container.gcp.crossplane.io/v1alpha1
+      kind: NodePool
+      spec:
+        forProvider:
+          initialNodeCount: 1
+          clusterSelector:
+            matchControllerRef: true
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.nodes"
+      toFieldPath: "spec.forProvider.initialNodeCount"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"

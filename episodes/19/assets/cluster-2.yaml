@@ -1,0 +1,14 @@
+apiVersion: kubernetes.hasheddan.org/v1alpha1
+kind: Cluster
+metadata:
+  name: cluster-2
+spec:
+  writeConnectionSecretToRef:
+    name: gke-conn
+    namespace: default
+  compositionSelector:
+    matchLabels:
+      provider: gcp
+  nodes: 3
+  providerRef:
+    name: gcp-provider

@@ -1,0 +1,222 @@
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: Composition
+metadata:
+  name: clusters.kubernetes.eks.hasheddan.org
+  labels:
+    provider: aws
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  reclaimPolicy: Delete
+  from:
+    apiVersion: kubernetes.hasheddan.org/v1alpha1
+    kind: Cluster
+  to:
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRole
+      metadata:
+        labels:
+          cluster-role: "true"
+      spec:
+        forProvider:
+          description: Example EKS IAM role
+          assumeRolePolicyDocument: |
+            {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Principal": {
+                    "Service": "eks.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+                }
+              ]
+            }
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRolePolicyAttachment
+      spec:
+        forProvider:
+          roleNameSelector:
+            matchControllerRef: true
+            matchLabels:
+              cluster-role: "true"
+          policyArn: arn:aws:iam::aws:policy/AmazonEKSServicePolicy
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRolePolicyAttachment
+      spec:
+        forProvider:
+          roleNameSelector:
+            matchControllerRef: true
+            matchLabels:
+              cluster-role: "true"
+          policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: eks.aws.crossplane.io/v1beta1
+      kind: Cluster
+      spec:
+        forProvider:
+          roleArnSelector:
+            matchControllerRef: true
+            matchLabels:
+              cluster-role: "true"
+          resourcesVpcConfig:
+            publicAccessCidrs:
+            - 0.0.0.0/0
+            endpointPublicAccess: true
+            subnetIds:
+            - subnet-582b3821
+            - subnet-825468c9
+            - subnet-8e6c8ed3
+            - subnet-a31d7888
+          version: "1.15"
+        reclaimPolicy: Delete
+        writeConnectionSecretToRef:
+          name: cluster-conn
+          namespace: default
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+    connectionDetails:
+    - fromConnectionSecretKey: kubeconfig
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRole
+      metadata:
+        labels:
+          node-role: "true"
+      spec:
+        forProvider:
+          description: EKS Node IAM Role
+          assumeRolePolicyDocument: |
+            {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Principal": {
+                    "Service": "ec2.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+                }
+              ]
+            }
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRolePolicyAttachment
+      spec:
+        forProvider:
+          roleNameSelector:
+            matchControllerRef: true
+            matchLabels:
+              node-role: "true"
+          policyArn: arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRolePolicyAttachment
+      spec:
+        forProvider:
+          roleNameSelector:
+            matchControllerRef: true
+            matchLabels:
+              node-role: "true"
+          policyArn: arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: identity.aws.crossplane.io/v1beta1
+      kind: IAMRolePolicyAttachment
+      spec:
+        forProvider:
+          roleNameSelector:
+            matchControllerRef: true
+            matchLabels:
+              node-role: "true"
+          policyArn: arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        reclaimPolicy: Delete
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"
+  - base:
+      apiVersion: eks.aws.crossplane.io/v1alpha1
+      kind: NodeGroup
+      spec:
+        forProvider:
+          scalingConfig:
+            desiredSize: 1
+          clusterNameSelector:
+            matchControllerRef: true
+          nodeRoleSelector:
+            matchControllerRef: true
+            matchLabels:
+              node-role: "true"
+          subnets:
+          - subnet-582b3821
+          - subnet-825468c9
+          - subnet-8e6c8ed3
+          - subnet-a31d7888
+        reclaimPolicy: Delete
+        writeConnectionSecretToRef:
+          name: temp
+          namespace: default
+    patches:
+    - fromFieldPath: "metadata.labels"
+      toFieldPath: "metadata.labels"
+    - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
+      toFieldPath: "metadata.annotations[crossplane.io/external-name]"
+    - fromFieldPath: "spec.nodes"
+      toFieldPath: "spec.forProvider.scalingConfig.desiredSize"
+    - fromFieldPath: "spec.providerRef.name"
+      toFieldPath: "spec.providerRef.name"

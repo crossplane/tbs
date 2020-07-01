@@ -1,0 +1,36 @@
+# This defines our new 'Cluster', i.e. an EKS cluster with node groups.
+apiVersion: apiextensions.crossplane.io/v1alpha1
+kind: InfrastructureDefinition
+metadata:
+  name: clusters.kubernetes.hasheddan.org
+spec:
+  connectionSecretKeys:
+  - kubeconfig
+  crdSpecTemplate:
+    group: kubernetes.hasheddan.org
+    version: v1alpha1
+    names:
+      kind: Cluster
+      listKind: ClusterList
+      plural: clusters
+      singular: cluster
+    validation:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              nodes:
+                type: integer
+                description: Number of nodes in the cluster
+              providerRef:
+                type: object
+                description: Crossplane provider credentials to use.
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            required:
+            - providerRef
