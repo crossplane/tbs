@@ -1,0 +1,7 @@
+apiVersion: packages.crossplane.io/v1alpha1
+kind: ClusterPackageInstall
+metadata:
+  name: provider-aws
+  namespace: crossplane-system
+spec:
+  package: "hasheddan/provider-aws:nodegroup"

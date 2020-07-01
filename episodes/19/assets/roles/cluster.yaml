@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: clusters.kubernetes.hasheddan.org
+  labels:
+    rbac.crossplane.io/aggregate-to-crossplane: "true"
+rules:
+- apiGroups:
+  - kubernetes.hasheddan.org
+  resources:
+  - clusters
+  - clusters/status
+  verbs:
+  - "*"

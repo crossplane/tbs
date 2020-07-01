@@ -1,0 +1,14 @@
+apiVersion: kubernetes.hasheddan.org/v1alpha1
+kind: Cluster
+metadata:
+  name: cluster-1
+spec:
+  writeConnectionSecretToRef:
+    name: eks-conn
+    namespace: default
+  compositionSelector:
+    matchLabels:
+      provider: aws
+  nodes: 3
+  providerRef:
+    name: aws-provider
