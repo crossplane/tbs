@@ -31,6 +31,13 @@ Episodes generally follow a similar format:
 * [TBS(11): Cluster API](episodes/11)
 * [TBS(12): Linkerd](episodes/12)
 * [TBS(13): OpenFaaS](episodes/13)
+* [TBS(14): Open Policy Agent](episodes/14)
+* [TBS(15): Knative](episodes/15)
+* [TBS(16): Velero](episodes/16)
+* [TBS(17): NATS](episodes/17)
+* [TBS(18): Adding Cloud Pub/Sub Support to provider-gcp](episodes/18)
+* [TBS(19): Falco](episodes/19)
+* [TBS(20): Packet](episodes/20)
 
 ## Requesting a Topic
 

@@ -1,0 +1,96 @@
+# tink-provisioner.yaml
+apiVersion: server.packet.crossplane.io/v1alpha2
+kind: Device
+metadata:
+  name: tink-provisioner
+spec:
+  forProvider:
+    hostname: tink-provisioner
+    plan: c2.medium.x86
+    facility: sjc1
+    operatingSystem: ubuntu_20_04
+    billingCycle: hourly
+    hardware_reservation_id: next_available
+    locked: false
+    networkType: hybrid
+    tags:
+    - crossplane
+    - tinkerbell
+    - tbs
+  providerRef:
+    name: packet-provider
+  writeConnectionSecretToRef:
+    name: devices-creds
+    namespace: crossplane-system
+  reclaimPolicy: Delete
+---
+# vlan.yaml
+apiVersion: vlan.packet.crossplane.io/v1alpha1
+kind: VirtualNetwork
+metadata:
+  spec:
+    forProvider:
+      description: Provisioning VLAN for Tinkerbell
+      facility: sjc1
+    providerRef:
+      name: packet-provider
+---
+# assign-vlan-provisioner.yaml
+apiVersion: ports.packet.crossplane.io/v1alpha1
+kind: Assignment
+metadata:
+  name: assign-vlan-provisioner
+spec:
+  forProvider:
+    deviceIdRef:
+      name: tink-provisioner
+    virtualNetworkIdRef:
+      name: tbs-vlan
+    name: eth1
+  providerRef:
+    name: packet-provider
+---
+# assign-vlan-worker-0.yaml
+apiVersion: ports.packet.crossplane.io/v1alpha1
+kind: Assignment
+metadata:
+  name: assign-vlan-worker-0
+spec:
+  forProvider:
+    deviceIdRef:
+      name: tink-worker-0
+    virtualNetworkIdRef:
+      name: tbs-vlan
+    name: eth1
+  providerRef:
+    name: packet-provider
+---
+# tink-worker-0.yaml
+apiVersion: server.packet.crossplane.io/v1alpha2
+kind: Device
+metadata:
+  name: tink-worker-0
+spec:
+  forProvider:
+    hostname: tink-worker-0
+    plan: c2.medium.x86
+    facility: sjc1
+    billingCycle: hourly
+    hardwareReservationID: next_available
+    operatingSystem: "custom_ipxe"
+    ipxeScriptUrl: https://boot.netboot.xyz
+    alwaysPXE: true
+    locked: false
+    networkType: layer2-individual
+    tags:
+    - crossplane
+    - tinkerbell
+    - tbs
+  providerRef:
+    name: packet-provider
+  writeConnectionSecretToRef:
+    name: devices-creds
+    namespace: crossplane-system
+  reclaimPolicy: Delete
+---
+
