@@ -7,7 +7,7 @@ context-aware policy for your cloud-native environments. Because OPA integrates
 with Kubernetes, it can be used with Crossplane to set global policy on
 provisioning cloud resources. We will take a look at how to write these
 policies, as well as how to put them into action using both plain OPA and
-[Gatekeeper](https://github.com/open-policy-agent/...), OPA's native Kubernetes
+[Gatekeeper](https://github.com/open-policy-agent/gatekeeper), OPA's native Kubernetes
 integration.
 
 Hosts: [@hasheddan](https://twitter.com/hasheddan) and [Torin
