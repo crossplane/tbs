@@ -97,7 +97,7 @@ spec:
         reclaimPolicy: Delete
         writeConnectionSecretToRef:
           name: cluster-conn
-          namespace: default
+          namespace: crossplane-system
     patches:
     - fromFieldPath: "metadata.labels"
       toFieldPath: "metadata.labels"
@@ -210,7 +210,7 @@ spec:
         reclaimPolicy: Delete
         writeConnectionSecretToRef:
           name: temp
-          namespace: default
+          namespace: crossplane-system
     patches:
     - fromFieldPath: "metadata.labels"
       toFieldPath: "metadata.labels"
